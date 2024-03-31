@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cats Information</title>
+    <style>
+        img{
+            max-width: 250px,;
+            max-height: 275px;
+        }
+        button{
+           width: 90px;
+           height: 45px;
+           background-color: lightgrey;
+           border-radius: 7px;
+           border-color: black;
+        }
+        button:hover{
+            background-color: darkorange;
+        }
+        button:active {
+        background-color:chocolate;
+    }
+    </style>
+</head>
+<body>
+    <div id="catInfo"></div>
+    <button onclick="showCat(0)">Cat 1</button>
+    <button onclick="showCat(1)">Cat 2</button>
+    <button onclick="showCat(2)">Cat 3</button>
+    <button onclick="showCat(3)">Cat 4</button>
+    <script>
+        function Cat(photoURL, breed, age, gender, furColor, name) {
+            this.photoURL = photoURL;
+            this.breed = breed;
+            this.age = age;
+            this.gender = gender;
+            this.furColor = furColor;
+            this.name = name;
+            this.isSleeping = false; 
+
+            this.askForFood = function() {
+                if (!this.isSleeping) {
+                    console.log(this.name + " просить їсти!");
+                } else {
+                    console.log(this.name + " спить, не може просити їсти!");
+                }
+            };
+
+            this.sleep = function() {
+                this.isSleeping = true;
+                console.log(this.name + " лягає спати.");
+            };
+   
+            this.wakeUp = function() {
+                this.isSleeping = false;
+                console.log(this.name + " прокидається.");
+            };
+        }
+
+        var cats = [
+            new Cat("https://kartinki.pics/pics/uploads/posts/2022-09/thumbs/1662663360_2-kartinkin-net-p-koshka-dvornyazhka-pinterest-2.jpg","Без породи", 1, "Хлопчик", "Сірий", "Джесі"),
+            new Cat("https://lh3.googleusercontent.com/proxy/hjB7FikOty7Gbzt2ey1rarGk9FshN-ss7bk4k3mSZFo5pfhrCgS-ZPiWCGtbZJoyFAtaQSYiPWPPRT8tGQAJ2WgIG01wyfsvy6I7D8QR6_JTFEadQnzsqO6qzHTbbkiFpp6WAQ","Maine Coon", 2, "Дівчинка", "Рижий", "Пушок"),
+            new Cat("https://i.uaportal.com/gallery/2023/12/4/258381d0c6d7e197e59806c654c006e9.jpg","Siamese", 4, "Хлопчик", "Бежевий", "Лео"),
+            new Cat("https://upload.wikimedia.org/wikipedia/commons/b/b6/Cat_Sphynx._img_040.jpg","Sphynx", 3, "Дівчинка", "Рожевий", "Віола")
+        ];
+
+        function showCat(index) {
+            var cat = cats[index];
+            var catInfo = document.getElementById("catInfo");
+            var status = cat.isSleeping ? "спить" : "не спить";
+            catInfo.innerHTML = `
+                <img src="${cat.photoURL}" alt="${cat.name}">
+            <ul>
+                <li><h2>${cat.name}</h2></li>
+                <li><p>Порода: ${cat.breed}</p></li>
+                <li><p>Вік: ${cat.age}</p></li>
+                <li><p>Стать: ${cat.gender}</p></li>
+                <li><p>Колір шерстки: ${cat.furColor}</p></li>
+                <li><p>Стан: ${status}</p></li>
+            </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
